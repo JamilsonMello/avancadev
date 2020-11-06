@@ -3,8 +3,10 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"io/ioutil"
 	"log"
 	"net/http"
+	"net/url"
 )
 
 type Coupon struct {
@@ -43,9 +45,18 @@ func main() {
 
 func home(w http.ResponseWriter, r *http.Request) {
 	coupon := r.PostFormValue("coupon")
+	email := r.PostFormValue("email")
 	valid := coupons.Check(coupon)
 
+	fmt.Print(r)
+
 	result := Result{Status: valid}
+
+	resultEmail := makeHttpCall("http://localhost:9093", email)
+
+	if resultEmail.Status == "invalid mail" {
+		result.Status = "invalid mail"
+	}
 
 	jsonResult, err := json.Marshal(result)
 	if err != nil {
@@ -53,5 +64,31 @@ func home(w http.ResponseWriter, r *http.Request) {
 	}
 
 	fmt.Fprintf(w, string(jsonResult))
+
+}
+
+func makeHttpCall(urlMicroservice string, email string) Result {
+
+	values := url.Values{}
+	values.Add("email", email)
+
+	res, err := http.PostForm(urlMicroservice, values)
+	if err != nil {
+		result := Result{Status: "Servidor fora do ar!"}
+		return result
+	}
+
+	defer res.Body.Close()
+
+	data, err := ioutil.ReadAll(res.Body)
+	if err != nil {
+		log.Fatal("Error processing result")
+	}
+
+	result := Result{}
+
+	json.Unmarshal(data, &result)
+
+	return result
 
 }
