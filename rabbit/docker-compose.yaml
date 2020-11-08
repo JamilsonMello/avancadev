@@ -12,3 +12,18 @@ services:
     ports:
       - "15672:15672"
       - "5672:5672"
+
+  a: 
+    image: "gabrielnt/microservice-a"
+    ports: 
+      - 9090:9090
+
+  b: 
+    image: "gabrielnt/microservice-b"
+    depends_on:
+      - "rabbit"
+
+  c: 
+    image: "gabrielnt/microservice-c"
+    ports: 
+      - 9092:9092
