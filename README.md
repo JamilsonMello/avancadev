@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://github.com/gabriel-nt/Happy/blob/master/web/src/images/logo-git.png" alt="logo" height="65"/>
+  <img src="https://github.com/gabriel-nt/avancadev/blob/main/frontend/src/assets/logo.png" alt="logo"/>
 </p>
 
 <h1 align="center">
@@ -41,7 +41,7 @@
 Durante a semana do Avança Dev, desenvolvemos algumas aplicações com Microsserviços utilizando Golang, React, Containers com Docker e Kurbenetes
 
 ### ✅ Demonstração do Frontend
-<img src="https://github.com/gabriel-nt/Happy/blob/master/web/src/images/dashboard.PNG" />
+<img src="https://github.com/gabriel-nt/avancadev/blob/main/frontend/src/assets/dashboard.PNG" />
 
 ### ⚙ Pré-requisitos
 
