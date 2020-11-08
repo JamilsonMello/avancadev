@@ -5,7 +5,7 @@ on:
       - master
 
 jobs: 
-  CI: 
+  deploy: 
     runs-on: ubuntu-latest
 
     steps: 
@@ -14,12 +14,10 @@ jobs:
         uses: action/setup-node@v1
         with:
           node-version: 12
-
       - name: Install dependecies
         run: yarn install
-
       - name: Testing
         run: yarn test --wacthAll false
-
       - name: Build
         run: yarn build
+        
