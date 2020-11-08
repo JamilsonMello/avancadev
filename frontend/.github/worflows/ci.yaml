@@ -1,0 +1,25 @@
+name: CI
+on:
+  push: 
+    branches:
+      - master
+
+jobs: 
+  CI: 
+    run-on: ubuntu-latest
+
+    steps: 
+      - uses: actions/chechkout@v1
+      - name: Get Node.js
+        uses: action/setup-node@v1
+        with:
+          node-version: 12
+
+      - name: Install dependecies
+        run: yarn install
+
+      - name: Testing
+        run: yarn test --wacthAll false
+
+      - name: Build
+        run: yarn build
